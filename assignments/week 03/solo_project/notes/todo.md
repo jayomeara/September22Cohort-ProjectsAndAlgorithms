@@ -1,0 +1,1 @@
+- convert numeric input to decimal format in SQL
