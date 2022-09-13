@@ -68,7 +68,9 @@ def dashboard():
     data = {
         'id': session['user_id']
     }
-    # Score.updateGasScore()
+    Score.updateGasScore()
+    Score.updateElectricScore()
+    Score.updateVehicleScore()
     theUser = User.getOne(data)
     months = Month.getAll()
     assets = Asset.getAll()

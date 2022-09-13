@@ -34,7 +34,7 @@
         </header>
     <div class="row align-items-start">
         <div class="col">
-                <div class="card text-dark bg-light mb-3">
+                <div class="card text-center text-dark bg-light mb-3">
                     <div class="card-header">Your current score:</div>
                         <div class="cardbody">
                             {% for score in scores: %}
@@ -44,7 +44,7 @@
                 </div>
         </div>
         <div class="col">
-                    <div class="card text-dark bg-light mb-3">
+                    <div class="card text-center text-dark bg-light mb-3">
                         <div class="card-header">See Score Breakdown</div>
                         <div class="card-body">
                             <table class="table table-striped">
@@ -59,11 +59,8 @@
                                     {% for score in scores: %}
                                     <tr>
                                         <td>{{score.gasScore}}</td>
-                                        <td>{{score.gasScore}}</td>
                                         <td>{{score.electricityScore}}</td>
-                                        <td>
-                                            <a href="/edit/{{score.id}}">Edit</a>
-                                        </td>
+                                        <td>{{score.vehicleScore}}</td>
                                     </tr>
                                     {% endfor %}
                                 </tbody>

@@ -70,54 +70,68 @@ class Score:
     def updateGasScore(cls):
         query = 'SELECT gas FROM monthData;'
         results = connectToMySQL(cls.db).query_db(query)
-        print(results)
+        if len(results) < 1:
+            return False
         gas = []
         for row in results:
-            gas.append(cls(row))
-        if len(gas) < 1:
-            return False
+            gas.append(row["gas"])
+        # print('gas:', gas)
         list_length = len(gas)
         sumOfElements = 0
         for i in range(list_length):
             sumOfElements=sumOfElements+gas[i]
+        # print('sumOfElements', sumOfElements)
         gasScore = sumOfElements/list_length
-        query = 'update score set gasTotal = %(sumOfElements)s, gasScore= %(gasScore)s;'
-        return query
+        print('gasScore', gasScore)
+        query2 = 'update score set gasTotal = {sumOfElements}, gasScore= {gasScore} WHERE id = 1;'
+        results2 = connectToMySQL(cls.db).query_db(query2)
+        return results2
         
     @classmethod
     def updateElectricScore(cls):
         query = 'SELECT electric FROM monthData;'
         results = connectToMySQL(cls.db).query_db(query)
-        print(results)
+        if len(results) < 1:
+            return False
         electric = []
         for row in results:
-            electric.append(cls(row))
-        if len(electric) < 1:
-            return False
+            electric.append(row["electric"])
         list_length = len(electric)
         sumOfElements = 0
         for i in range(list_length):
             sumOfElements=sumOfElements+electric[i]
         electricScore = sumOfElements/list_length
-        query = 'update score set electricTotal = %(sumOfElements)s, electricityScore= %(electricScore)s;'
-        return query
+        print('electricScore', electricScore)
+        query2 = 'update score set electricTotal = {sumOfElements}, electricityScore= {electricScore} WHERE id = 1;'
+        results2 = connectToMySQL(cls.db).query_db(query2)
+        return results2
 
+    @classmethod
     def updateVehicleScore(cls):
         query = 'SELECT milesDriven FROM monthData;'
         results = connectToMySQL(cls.db).query_db(query)
-        print(results)
+        if len(results) < 1:
+            return False
         miles = []
         for row in results:
-            miles.append(cls(row))
-        if len(miles) < 1:
-            return False
+            miles.append(row["milesDriven"])
         list_length = len(miles)
         sumOfElements = 0
         for i in range(list_length):
             sumOfElements=sumOfElements+miles[i]
         vehicleScore = sumOfElements/list_length
-        query = 'update score set vehicleMiles = %(sumOfElements)s, vehicleScore= %(vehicleScore)s;'
-        return query
+        query2 = 'update score set vehicleMiles = {sumOfElements}, vehicleScore= {vehicleScore} WHERE id = 1;'
+        results2 = connectToMySQL(cls.db).query_db(query2)
+        return results2
+
+
+    @classmethod
+    def updateJoule(cls):
+        query = 'SELECT * FROM score;'
+        results = connectToMySQL(cls.db).query_db(query)
+        if len(results) < 1:
+            return False
+
 
 # gas = [100, 150, 125] length = 3
 # sum[list]/length == Score.Update(gasScore)
