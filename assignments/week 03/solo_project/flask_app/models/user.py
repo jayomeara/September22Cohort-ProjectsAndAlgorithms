@@ -42,7 +42,7 @@ class User:
 
     @classmethod
     def save(cls, data):
-        query = 'INSERT INTO user (firstName, lastName, username, email, password) VALUES (%(firstName)s, %(lastName)s, %(username)s, %(email)s, %(password)s);'
+        query = 'INSERT INTO user (firstName, lastName, email, password) VALUES (%(firstName)s, %(lastName)s, %(email)s, %(password)s);'
         return connectToMySQL(cls.db).query_db(query, data)
 
     @classmethod
@@ -82,21 +82,3 @@ class User:
             isValid = False
             flash("Passwords don't match")
         return isValid
-
-
-    # @classmethod
-    # def usersImages(cls, data):
-    #     query = 'SELECT * FROM user LEFT JOIN image ON user.id = image.user_id WHERE user.id = %(id)s;'
-    #     results = connectToMySQL(cls.db).query_db(query, data)
-    #     user = cls(results[0])
-    #     for row in results:
-    #         imageData = {
-    #             'id': row['image.id'],
-    #             'title': row['title'],
-    #             'url': row['url'],
-    #             'createdAt': row['image.createdAt'],
-    #             'updatedAt': row['image.updatedAt'],
-    #             'user_id': row['user_id']
-    #         }
-    #         user.images.append(image.Image(imageData))
-    #     return user

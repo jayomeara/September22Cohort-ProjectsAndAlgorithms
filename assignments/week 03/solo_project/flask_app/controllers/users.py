@@ -41,7 +41,7 @@ def login():
     }
     user = User.getEmail(data) # check if the email is in the database
     if not user: # if not let them know
-        flash('That email is not in our database please register')
+        flash('That email is not in our database')
         return redirect('/')
     if not bcrypt.check_password_hash(user.password, request.form['password']):
         flash('Wrong password')
@@ -59,7 +59,7 @@ def logout():
 @app.route('/dashboard/')
 def dashboard():
     if 'user_id' not in session:
-        flash("Dude private area log in please")
+        flash("Please Login")
         return redirect('/')
     data = {
         'id': session['user_id']
@@ -70,7 +70,7 @@ def dashboard():
 @app.route('/addMonth/')
 def addMonth():
     if 'user_id' not in session:
-        flash("log in please")
+        flash("Please login in")
         return redirect('/')
     data = {
         'id': session['user_id']

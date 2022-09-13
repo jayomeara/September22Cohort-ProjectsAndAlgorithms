@@ -8,7 +8,7 @@
     <title>JouleScore®</title>
 </head>
 <body class="container">
-    <header class="col-4 p-4">
+    <header class="row">
         <div class="alert alert-light" role="alert">
             {% with messages = get_flashed_messages() %}
                 {%if messages %}
@@ -23,7 +23,7 @@
             {% block menu %} {% include 'menu.html' %} {% endblock menu %}
         </nav> -->
     </header>
-    <main class="bd-content">
+    <main class="container">
             <div class="row">
                 <form action="/register/" method="post" class="col-4 p-4">
                     <div class="form-group">
