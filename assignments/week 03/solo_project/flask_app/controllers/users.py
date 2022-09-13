@@ -3,6 +3,7 @@ from flask import render_template, redirect, session, request, flash
 from flask_bcrypt import Bcrypt
 from flask_app.models.user import User
 from flask_app.models.month import Month
+from flask_app.models.asset import Asset
 
 bcrypt = Bcrypt(app)
 
@@ -65,7 +66,9 @@ def dashboard():
         'id': session['user_id']
     }
     theUser = User.getOne(data)
-    return render_template('dashboard.html', user=theUser)
+    months = Month.getAll()
+    assets = Asset.getAll()
+    return render_template('dashboard.html', user=theUser, months=months, assets=assets)
 
 @app.route('/addMonth/')
 def addMonth():
@@ -90,4 +93,29 @@ def createMonth():
     }
     Month.save(data)
     flash("Month Saved")
+    return redirect('/dashboard/')
+
+@app.route('/addAsset/')
+def addAsset():
+    if 'user_id' not in session:
+        flash("Please login in")
+        return redirect('/')
+    data = {
+        'id': session['user_id']
+    }
+    theUser = User.getOne(data)
+    return render_template('addAsset.html', user=theUser)
+
+@app.route('/createAsset/', methods=['post'])
+def createAsset():
+    data = {
+        'homeName': request.form['homeName'],
+        'homeSQft': request.form['homeSQft'],
+        'zipCode': request.form['zipCode'],
+        'vehicleName': request.form['vehicleName'],
+        'vehicleMPG': request.form['vehicleMPG'],
+        'user_id': request.form['user_id'],
+    }
+    Asset.save(data)
+    flash("Asset Saved")
     return redirect('/dashboard/')

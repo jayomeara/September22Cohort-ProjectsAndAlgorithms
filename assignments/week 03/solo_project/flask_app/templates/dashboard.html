@@ -22,20 +22,74 @@
                 <h1>JouleScore®</h1>
                 <h4>A more complete view of your energy use.</h4>
             </div>
-            <div><a href="/logout/">Logout</a></div>
+            <div>
+                <a href="/logout/">Logout</a>
+                <a href="/addMonth/">Add Monthly Data</a>
+                <a href="/addAsset/">Add Assets</a>
+            </div>
         </header>
     <main class="d-flex justify-content-between">
         <div class="card">
-            <p>Your current score:</p>
+            <div class="card-header">Your current score:</div>
         </div>
         <div class="card">
-            <p>See Score Breakdown</p>
+            <div class="card-header">See Score Breakdown</div>
         </div>
         <div class="card">
-            <a href="/addMonth/">Add Monthly Data</a>
+            <div class="card-header">All Monthly Data:</div>
+            <div class="card-body">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Gas</th>
+                            <th>Electricity</th>
+                            <th>Miles Driven</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for month in months: %}
+                    <tr>
+                        <td>{{month.month}}/{{month.year}}</td>
+                        <td>{{month.gas}}</td>
+                        <td>{{month.electric}}</td>
+                        <td>{{month.milesDriven}}</td>
+                        <td>
+                            <a href="/edit/{{month.id}}">Edit</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+                </table>
+            </div>
         </div>
         <div class="card">
-            <p>Add Asset Data</p>
+            <div class="card-header">All Assets:</div>
+            <div class="card-body">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Home Name</th>
+                            <th>Square Footage</th>
+                            <th>Vehicle Name</th>
+                            <th>Vehicle MPG</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for asset in assets: %}
+                    <tr>
+                        <td>{{asset.homeName}}</td>
+                        <td>{{asset.homeSQft}}</td>
+                        <td>{{asset.vehicleName}}</td>
+                        <td>{{asset.vehicleMPG}}</td>
+                        <td>
+                            <a href="/edit/{{asset.id}}">Edit</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+                </table>
+            </div>
         </div>
     </main>
     <footer>
