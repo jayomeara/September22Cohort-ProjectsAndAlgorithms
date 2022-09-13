@@ -4,6 +4,7 @@ from flask_bcrypt import Bcrypt
 from flask_app.models.user import User
 from flask_app.models.month import Month
 from flask_app.models.asset import Asset
+from flask_app.models.car import Car
 
 bcrypt = Bcrypt(app)
 
@@ -68,7 +69,8 @@ def dashboard():
     theUser = User.getOne(data)
     months = Month.getAll()
     assets = Asset.getAll()
-    return render_template('dashboard.html', user=theUser, months=months, assets=assets)
+    cars = Car.getAll()
+    return render_template('dashboard.html', user=theUser, months=months, assets=assets, cars=cars)
 
 @app.route('/addMonth/')
 def addMonth():
@@ -118,4 +120,15 @@ def createAsset():
     }
     Asset.save(data)
     flash("Asset Saved")
+    return redirect('/dashboard/')
+
+@app.route('/createCar/', methods=['post'])
+def createCar():
+    data = {
+        'carName': request.form['carName'],
+        'carMPG': request.form['carMPG'],
+        'user_id': request.form['user_id'],
+    }
+    Car.save(data)
+    flash("Vehicle Saved")
     return redirect('/dashboard/')

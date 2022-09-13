@@ -36,16 +36,21 @@
                 <label for="zipCode">Zip Code</label>
                 <input type="text" class="form-control" name="zipCode" placeholder="10000" required>
               </div>
+            <div><input type="hidden" name="user_id" value="{{session.user_id}}"></div>
+            <div><button class="btn btn-primary">Create Home</button></div>
+          </form>
+
+          <form action="/createCar/" method="post">
               <div class="form-group">
-                <label for="vehicleName">Vehicle Name</label>
-                <input type="text" class="form-control" name="vehicleName" placeholder="Jolene" required>
+                <label for="carName">Vehicle Name</label>
+                <input type="text" class="form-control" name="carName" placeholder="Jolene" required>
               </div>
               <div class="form-group">
-                <label for="vehicleMPG">Vehicle MPG</label>
-                <input type="text" class="form-control" name="vehicleMPG" placeholder="00" required>
+                <label for="carMPG">Vehicle MPG</label>
+                <input type="text" class="form-control" name="carMPG" placeholder="15" required>
               </div>
             <div><input type="hidden" name="user_id" value="{{session.user_id}}"></div>
-            <div><button class="btn btn-primary">Create Asset</button></div>
+            <div><button class="btn btn-primary">Create Vehicle</button></div>
           </form>
     </main>
     <footer>

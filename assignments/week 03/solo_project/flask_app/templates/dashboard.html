@@ -28,70 +28,99 @@
                 <a href="/addAsset/">Add Assets</a>
             </div>
         </header>
-    <main class="d-flex justify-content-between">
-        <div class="card">
-            <div class="card-header">Your current score:</div>
-        </div>
-        <div class="card">
-            <div class="card-header">See Score Breakdown</div>
-        </div>
-        <div class="card">
-            <div class="card-header">All Monthly Data:</div>
-            <div class="card-body">
-                <table class="table table-striped">
-                    <thead>
+    <div class="container">
+        <div class="card text-center">
+                <div class="card-header">Your current score:</div>
+
+            </div>
+            <div class="card w-20">
+                <div class="card-header">See Score Breakdown</div>
+                <div class="card-body">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Gas Score</th>
+                                <th>Electricity Score</th>
+                                <th>Vehicle Score</th>
+                            </tr>
+                        </thead>
+                    </table>
+                    </div>
+            </div>
+        <div>
+            <div class="card w-20"> 
+                <div class="card-header">All Monthly Data:</div>
+                <div class="card-body">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Gas</th>
+                                <th>Electricity</th>
+                                <th>Miles Driven</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for month in months: %}
                         <tr>
-                            <th>Date</th>
-                            <th>Gas</th>
-                            <th>Electricity</th>
-                            <th>Miles Driven</th>
+                            <td>{{month.month}}/{{month.year}}</td>
+                            <td>{{month.gas}}</td>
+                            <td>{{month.electric}}</td>
+                            <td>{{month.milesDriven}}</td>
+                            <td>
+                                <a href="/edit/{{month.id}}">Edit</a>
+                            </td>
                         </tr>
-                    </thead>
-                    <tbody>
-                    {% for month in months: %}
-                    <tr>
-                        <td>{{month.month}}/{{month.year}}</td>
-                        <td>{{month.gas}}</td>
-                        <td>{{month.electric}}</td>
-                        <td>{{month.milesDriven}}</td>
-                        <td>
-                            <a href="/edit/{{month.id}}">Edit</a>
-                        </td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-                </table>
+                        {% endfor %}
+                    </tbody>
+                    </table>
+                </div>
             </div>
         </div>
-        <div class="card">
-            <div class="card-header">All Assets:</div>
-            <div class="card-body">
-                <table class="table table-striped">
-                    <thead>
+            <div class="card w-20">
+                <div class="card-header">All Assets:</div>
+                <div class="card-body">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Home Name</th>
+                                <th>Square Footage</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for asset in assets: %}
                         <tr>
-                            <th>Home Name</th>
-                            <th>Square Footage</th>
-                            <th>Vehicle Name</th>
-                            <th>Vehicle MPG</th>
+                            <td>{{asset.homeName}}</td>
+                            <td>{{asset.homeSQft}}</td>
+                            <td>
+                                <a href="/edit/{{asset.id}}">Edit</a>
+                            </td>
                         </tr>
-                    </thead>
-                    <tbody>
-                    {% for asset in assets: %}
-                    <tr>
-                        <td>{{asset.homeName}}</td>
-                        <td>{{asset.homeSQft}}</td>
-                        <td>{{asset.vehicleName}}</td>
-                        <td>{{asset.vehicleMPG}}</td>
-                        <td>
-                            <a href="/edit/{{asset.id}}">Edit</a>
-                        </td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-                </table>
+                        {% endfor %}
+                    </tbody>
+                    </table>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Vehicle Name</th>
+                                <th>Vehicle MPG</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for car in cars: %}
+                        <tr>
+                            <td>{{car.carName}}</td>
+                            <td>{{car.carMPG}}</td>
+                            <td>
+                                <a href="/edit/{{car.id}}">Edit</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                    </table>
+                </div>
             </div>
-        </div>
-    </main>
+    </div>
     <footer>
 
     </footer>
