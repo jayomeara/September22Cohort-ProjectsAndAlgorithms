@@ -83,7 +83,7 @@ class Score:
         # print('sumOfElements', sumOfElements)
         gasScore = sumOfElements/list_length
         print('gasScore', gasScore)
-        query2 = 'update score set gasTotal = {sumOfElements}, gasScore= {gasScore} WHERE id = 1;'
+        query2 = 'update score set gasTotal = %(sumOfElements)s, gasScore= %(gasScore)s WHERE %(id)s;'
         results2 = connectToMySQL(cls.db).query_db(query2)
         return results2
         
@@ -102,7 +102,7 @@ class Score:
             sumOfElements=sumOfElements+electric[i]
         electricScore = sumOfElements/list_length
         print('electricScore', electricScore)
-        query2 = 'update score set electricTotal = {sumOfElements}, electricityScore= {electricScore} WHERE id = 1;'
+        query2 = 'update score set electricTotal = %(sumOfElements)s, electricityScore= %(electricScore)s WHERE %(id)s;'
         results2 = connectToMySQL(cls.db).query_db(query2)
         return results2
 
@@ -120,7 +120,8 @@ class Score:
         for i in range(list_length):
             sumOfElements=sumOfElements+miles[i]
         vehicleScore = sumOfElements/list_length
-        query2 = 'update score set vehicleMiles = {sumOfElements}, vehicleScore= {vehicleScore} WHERE id = 1;'
+        print('vehicleScore', vehicleScore)
+        query2 = 'update score set vehicleMiles = %(sumOfElements)s, vehicleScore= %(vehicleScore) WHERE %(id)s;'
         results2 = connectToMySQL(cls.db).query_db(query2)
         return results2
 
@@ -131,6 +132,14 @@ class Score:
         results = connectToMySQL(cls.db).query_db(query)
         if len(results) < 1:
             return False
+        newScore = 0
+        newScore+(row["vehicleScore"])
+        newScore+(row["electricityScore"])
+        newScore+(row["vehicleScore"])
+        print('newScore', newScore)
+        query2 = 'update score set vehicleMiles = %(sumOfElements)s, vehicleScore= %(vehicleScore) WHERE %(id)s;'
+        results2 = connectToMySQL(cls.db).query_db(query2)
+        return results2
 
 
 # gas = [100, 150, 125] length = 3

@@ -71,6 +71,7 @@ def dashboard():
     Score.updateGasScore()
     Score.updateElectricScore()
     Score.updateVehicleScore()
+    # Score.updateJoule()
     theUser = User.getOne(data)
     months = Month.getAll()
     assets = Asset.getAll()
@@ -136,3 +137,25 @@ def createCar():
     Car.save(data)
     flash("Vehicle Saved")
     return redirect('/dashboard/')
+
+@app.route('/deleteMonth/<int:monthID>/')
+def deleteMonth(monthID):
+    if 'user_id' not in session:
+        return redirect('/')
+    else:
+        month = {
+            'id': monthID
+        }
+    Month.delete(month)
+    return redirect('/')
+
+@app.route('/deleteHome/<int:homeID>/')
+def deleteHome(homeID):
+    if 'user_id' not in session:
+        return redirect('/')
+    else:
+        month = {
+            'id': homeID
+        }
+    Month.delete(homeID)
+    return redirect('/')

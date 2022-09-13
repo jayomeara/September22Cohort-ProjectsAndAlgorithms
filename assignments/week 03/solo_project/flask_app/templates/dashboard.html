@@ -38,7 +38,7 @@
                     <div class="card-header">Your current score:</div>
                         <div class="cardbody">
                             {% for score in scores: %}
-                            <h1>{{score.currentScore}}
+                            <h1>jouleScore®: {{score.currentScore}}</h1>
                             {% endfor %}
                         </div>
                 </div>
@@ -92,7 +92,8 @@
                             <td>{{month.electric}}</td>
                             <td>{{month.milesDriven}}</td>
                             <td>
-                                <a href="/edit/{{month.id}}">Edit</a>
+                                <a href="/editMonth/{{month.id}}">Edit</a>
+                                <a href="/deleteMonth/{{month.id}}">Delete</a>
                             </td>
                         </tr>
                         {% endfor %}
@@ -118,7 +119,8 @@
                             <td>{{asset.homeName}}</td>
                             <td>{{asset.homeSQft}}</td>
                             <td>
-                                <a href="/edit/{{asset.id}}">Edit</a>
+                                <a href="/editHome/{{asset.id}}">Edit</a>
+                                <a href="/deleteHome/{{asset.id}}">Delete</a>
                             </td>
                         </tr>
                         {% endfor %}
@@ -137,7 +139,7 @@
                             <td>{{car.carName}}</td>
                             <td>{{car.carMPG}}</td>
                             <td>
-                                <a href="/edit/{{car.id}}">Edit</a>
+                                <a href="/editCar/{{car.id}}">Edit</a>
                             </td>
                         </tr>
                         {% endfor %}
