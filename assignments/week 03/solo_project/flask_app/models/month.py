@@ -19,6 +19,7 @@ class Month:
     def getAll(cls):
         query = 'SELECT * FROM monthData;'
         results = connectToMySQL(cls.db).query_db(query)
+        print (results)
         months = []
         for row in results:
             months.append(cls(row))

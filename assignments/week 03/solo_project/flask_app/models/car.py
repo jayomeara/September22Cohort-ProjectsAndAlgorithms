@@ -16,6 +16,7 @@ class Car:
     def getAll(cls):
         query = 'SELECT * FROM car;'
         results = connectToMySQL(cls.db).query_db(query)
+        print (results)
         cars = []
         for row in results:
             cars.append(cls(row))

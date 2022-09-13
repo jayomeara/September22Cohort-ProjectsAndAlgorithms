@@ -5,6 +5,7 @@ from flask_app.models.user import User
 from flask_app.models.month import Month
 from flask_app.models.asset import Asset
 from flask_app.models.car import Car
+from flask_app.models.score import Score
 
 bcrypt = Bcrypt(app)
 
@@ -32,6 +33,7 @@ def register():
             flash('Something went wrong')
             return redirect('/')
         else:
+            Score.create()
             session['user_id'] = id
             flash("You are now logged in")
             return redirect('/dashboard/')
@@ -70,7 +72,8 @@ def dashboard():
     months = Month.getAll()
     assets = Asset.getAll()
     cars = Car.getAll()
-    return render_template('dashboard.html', user=theUser, months=months, assets=assets, cars=cars)
+    scores = Score.getAll()
+    return render_template('dashboard.html', user=theUser, months=months, assets=assets, cars=cars, scores=scores)
 
 @app.route('/addMonth/')
 def addMonth():
@@ -114,8 +117,6 @@ def createAsset():
         'homeName': request.form['homeName'],
         'homeSQft': request.form['homeSQft'],
         'zipCode': request.form['zipCode'],
-        'vehicleName': request.form['vehicleName'],
-        'vehicleMPG': request.form['vehicleMPG'],
         'user_id': request.form['user_id'],
     }
     Asset.save(data)

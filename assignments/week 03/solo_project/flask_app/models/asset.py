@@ -9,8 +9,6 @@ class Asset:
         self.homeName = data['homeName']
         self.homeSQft = data['homeSQft']
         self.zipCode = data['zipCode']
-        self.vehicleName = data['vehicleName']
-        self.vehicleMPG = data['vehicleMPG']
         self.createdAt = data['createdAt']
         self.updatedAt = data['updatedAt']
         self.user_id = data['user_id']
@@ -19,6 +17,7 @@ class Asset:
     def getAll(cls):
         query = 'SELECT * FROM asset;'
         results = connectToMySQL(cls.db).query_db(query)
+        print (results)
         assets = []
         for row in results:
             assets.append(cls(row))
@@ -42,12 +41,12 @@ class Asset:
 
     @classmethod
     def save(cls, data):
-        query = 'INSERT INTO asset (homeName, homeSQft, zipCode, vehicleName, vehicleMPG, user_id) VALUES (%(homeName)s, %(homeSQft)s, %(zipCode)s, %(vehicleName)s, %(vehicleMPG)s, %(user_id)s);'
+        query = 'INSERT INTO asset (homeName, homeSQft, zipCode, user_id) VALUES (%(homeName)s, %(homeSQft)s, %(zipCode)s, %(user_id)s);'
         return connectToMySQL(cls.db).query_db(query, data)
 
     @classmethod
     def update(cls, data):
-        query = 'update asset set homeName=%(homeName)s, homeSQft=%(homeSQft)s, zipCode=%(zipCode)s, vehicleName=%(vehicleName)s, vehicleMPG=%(vehicleMPG)s, WHERE id = %(id)s;'
+        query = 'update asset set homeName=%(homeName)s, homeSQft=%(homeSQft)s, zipCode=%(zipCode)s, WHERE id = %(id)s;'
         return connectToMySQL(cls.db).query_db(query, data)
 
     @classmethod
