@@ -43,8 +43,8 @@ def login():
     data = {
         'email': request.form['email']
     }
-    user = User.getEmail(data) # check if the email is in the database
-    if not user: # if not let them know
+    user = User.getEmail(data)
+    if not user:
         flash('That email is not in our database')
         return redirect('/')
     if not bcrypt.check_password_hash(user.password, request.form['password']):
@@ -68,6 +68,7 @@ def dashboard():
     data = {
         'id': session['user_id']
     }
+    # Score.updateGasScore()
     theUser = User.getOne(data)
     months = Month.getAll()
     assets = Asset.getAll()

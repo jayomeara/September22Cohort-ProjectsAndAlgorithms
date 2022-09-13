@@ -6,66 +6,77 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/static/css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet"> 
     <title>JouleScore®</title>
 </head>
 <body class="container">
-  <div class="alert alert-light" role="alert">
-    {% with messages = get_flashed_messages() %}
-        {%if messages %}
-            {% for m in messages %}
-                <h5>{{m}}</h5>
-            {% endfor %}
-        {% endif %}
-    {% endwith %}
-  </div>
+    <div class="alert" role="alert">
+      {% with messages = get_flashed_messages() %}
+          {%if messages %}
+              {% for m in messages %}
+                  <h5>{{m}}</h5>
+              {% endfor %}
+          {% endif %}
+      {% endwith %}
+    </div>
     <header class="row justify-content-between">
-      <div class="col-4">
-          <h1>JouleScore®: Add Monthly Data</h1>
-      </div>
+        <div class="col-md-auto">
+            <h1>JouleScore®</h1>
+        </div>
+        <div class="col-auto">
+          <a href="/dashboard/">Home</a>
+          <a href="/addMonth/">Add Monthly Data</a>
+          <a href="/addAsset/">Add Assets</a>
+        </div>
     </header>
-    <main class="d-flex justify-content-center">
-        <form action="/createMonth/" method="post">
-            <div class="form-group">
-              <label for="year">Year</label>
-              <input type="text" class="form-control" name="year" placeholder="Year" minlength="4" maxlength="4" required>
-            </div>
-            <div class="form-group">
-                <label for="month">Month</label>
-                <input type="text" class="form-control" name="month" placeholder="Month" minlength="2" maxlength="2" required>
+    <div class="row align-items-start">
+          <div class="card text-dark bg-light mb-3" style="max-width: 50%;">
+              <div class="card-header">Add Month</div>
+              <div class="card-body">
+                <form action="/createMonth/" method="post">
+                    <div class="form-group">
+                      <label for="year">Year</label>
+                      <input type="text" class="form-control" name="year" placeholder="Year" minlength="4" maxlength="4" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="month">Month</label>
+                        <input type="text" class="form-control" name="month" placeholder="Month" minlength="2" maxlength="2" required>
+                      </div>
+                    <!-- <select class="form-select" name="month" aria-label="Month">
+                        <option selected>Choose Month:</option>
+                        <option value="01">January</option>
+                        <option value="02">February</option>
+                        <option value="03">March</option>
+                        <option value="04">April</option>
+                        <option value="05">May</option>
+                        <option value="06">June</option>
+                        <option value="07">July</option>
+                        <option value="08">August</option>
+                        <option value="09">September</option>
+                        <option value="10">October</option>
+                        <option value="11">November</option>
+                        <option value="12">December</option>
+                      </select> -->
+                    <div class="form-group">
+                        <label for="gas">Natural Gas</label>
+                        <input type="text" class="form-control" name="gas" placeholder="00" maxlength="50" required>
+                      </div>
+                      <div class="form-group">
+                        <label for="electric">Electricity</label>
+                        <input type="text" class="form-control" name="electric" placeholder="00" maxlength="50" required>
+                      </div>
+                      <div class="form-group">
+                        <label for="milesDriven">Miles Driven</label>
+                        <input type="text" class="form-control" name="milesDriven" placeholder="00" maxlength="50" required>
+                      </div>
+                    <div><input type="hidden" name="user_id" value="{{session.user_id}}"></div>
+                    <div><button class="btn btn-primary">Create Month</button></div>
+                  </form>
               </div>
-            <!-- <select class="form-select" name="month" aria-label="Month">
-                <option selected>Choose Month:</option>
-                <option value="01">January</option>
-                <option value="02">February</option>
-                <option value="03">March</option>
-                <option value="04">April</option>
-                <option value="05">May</option>
-                <option value="06">June</option>
-                <option value="07">July</option>
-                <option value="08">August</option>
-                <option value="09">September</option>
-                <option value="10">October</option>
-                <option value="11">November</option>
-                <option value="12">December</option>
-              </select> -->
-            <div class="form-group">
-                <label for="gas">Natural Gas</label>
-                <input type="text" class="form-control" name="gas" placeholder="00" maxlength="50" required>
-              </div>
-              <div class="form-group">
-                <label for="electric">Electricity</label>
-                <input type="text" class="form-control" name="electric" placeholder="00" maxlength="50" required>
-              </div>
-              <div class="form-group">
-                <label for="milesDriven">Miles Driven</label>
-                <input type="text" class="form-control" name="milesDriven" placeholder="00" maxlength="50" required>
-              </div>
-            <div><input type="hidden" name="user_id" value="{{session.user_id}}"></div>
-            <div><button class="btn btn-primary">Create Month</button></div>
-          </form>
-    </main>
-    <footer>
-
-    </footer>
+          </div>
+      </div>
+<footer><a href="/logout/">Logout</a></footer>
 </body>
 </html>

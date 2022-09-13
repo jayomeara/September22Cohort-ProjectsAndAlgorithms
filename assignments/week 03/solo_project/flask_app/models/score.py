@@ -66,17 +66,73 @@ class Score:
         query = "DELETE FROM score WHERE score.id = %(id)s;"
         return connectToMySQL(cls.db).query_db(query,data)
 
-    # @classmethod
-    # def updateScore(cls, data):
+    @classmethod
+    def updateGasScore(cls):
+        query = 'SELECT gas FROM monthData;'
+        results = connectToMySQL(cls.db).query_db(query)
+        print(results)
+        gas = []
+        for row in results:
+            gas.append(cls(row))
+        if len(gas) < 1:
+            return False
+        list_length = len(gas)
+        sumOfElements = 0
+        for i in range(list_length):
+            sumOfElements=sumOfElements+gas[i]
+        gasScore = sumOfElements/list_length
+        query = 'update score set gasTotal = %(sumOfElements)s, gasScore= %(gasScore)s;'
+        return query
+        
+    @classmethod
+    def updateElectricScore(cls):
+        query = 'SELECT electric FROM monthData;'
+        results = connectToMySQL(cls.db).query_db(query)
+        print(results)
+        electric = []
+        for row in results:
+            electric.append(cls(row))
+        if len(electric) < 1:
+            return False
+        list_length = len(electric)
+        sumOfElements = 0
+        for i in range(list_length):
+            sumOfElements=sumOfElements+electric[i]
+        electricScore = sumOfElements/list_length
+        query = 'update score set electricTotal = %(sumOfElements)s, electricityScore= %(electricScore)s;'
+        return query
+
+    def updateVehicleScore(cls):
+        query = 'SELECT milesDriven FROM monthData;'
+        results = connectToMySQL(cls.db).query_db(query)
+        print(results)
+        miles = []
+        for row in results:
+            miles.append(cls(row))
+        if len(miles) < 1:
+            return False
+        list_length = len(miles)
+        sumOfElements = 0
+        for i in range(list_length):
+            sumOfElements=sumOfElements+miles[i]
+        vehicleScore = sumOfElements/list_length
+        query = 'update score set vehicleMiles = %(sumOfElements)s, vehicleScore= %(vehicleScore)s;'
+        return query
+
+# gas = [100, 150, 125] length = 3
+# sum[list]/length == Score.Update(gasScore)
+
+
+
     #     query = 'SELECT * FROM score;'
     #     results = connectToMySQL(cls.db).query_db(query)
     #     print (results)
     #     newScores = []
     #     for row in results:
     #         newScores.append(cls(row))
-        
 
         # pull in month, car, and asset data
+        # convert string to FLOAT
         # do some math
         # run the update on the score
         # = newScores
