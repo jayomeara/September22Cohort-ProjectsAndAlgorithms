@@ -104,6 +104,35 @@ def createMonth():
     flash("Month Saved")
     return redirect('/dashboard/')
 
+@app.route('/updateMonth/<int:monthID>/')
+def updateMonth(monthID):
+    if 'user_id' not in session:
+        return redirect('/')
+    else:
+        data = {
+            'id': session['user_id']
+        }
+        theUser = User.getOne(data)
+        monthData = {
+            'id': monthID
+        }
+        month = Month.getOne(monthID)
+        return render_template('editAsset.html', user=theUser, month=month)
+
+@app.route('/editMonth/<int:monthID>/', methods=['post'])
+def updatedMonth(monthID):
+    data = {
+        'year': request.form['year'],
+        'month': request.form['month'],
+        'gas': request.form['gas'],
+        'electric': request.form['electric'],
+        'milesDriven': request.form['milesDriven'],
+        'user_id': request.form['user_id'],
+    }
+    Month.save(data)
+    flash("Month Saved")
+    return redirect('/dashboard/')
+
 @app.route('/addAsset/')
 def addAsset():
     if 'user_id' not in session:

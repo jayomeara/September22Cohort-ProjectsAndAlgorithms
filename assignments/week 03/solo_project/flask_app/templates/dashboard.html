@@ -58,9 +58,9 @@
                                 <tbody>
                                     {% for score in scores: %}
                                     <tr>
-                                        <td>{{score.gasScore}}</td>
-                                        <td>{{score.electricityScore}}</td>
-                                        <td>{{score.vehicleScore}}</td>
+                                        <td>{{score.gasScore}} kWh</td>
+                                        <td>{{score.electricityScore}} kWh</td>
+                                        <td>{{score.vehicleScore}} kWh</td>
                                     </tr>
                                     {% endfor %}
                                 </tbody>
@@ -88,9 +88,9 @@
                         {% for month in months: %}
                         <tr>
                             <td>{{month.month}}/{{month.year}}</td>
-                            <td>{{month.gas}}</td>
-                            <td>{{month.electric}}</td>
-                            <td>{{month.milesDriven}}</td>
+                            <td>{{month.gas}} kWh</td>
+                            <td>{{month.electric}} kWh</td>
+                            <td>{{month.milesDriven}} Miles</td>
                             <td>
                                 <a href="/editMonth/{{month.id}}">Edit</a>
                                 <a href="/deleteMonth/{{month.id}}">Delete</a>

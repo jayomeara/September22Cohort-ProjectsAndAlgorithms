@@ -38,13 +38,13 @@
                 <form action="/createMonth/" method="post">
                     <div class="form-group">
                       <label for="year">Year</label>
-                      <input type="text" class="form-control" name="year" placeholder="Year" minlength="4" maxlength="4" required>
+                      <input type="text" class="form-control" name="year" value= "{{monthData.year}}" minlength="4" maxlength="4" required>
                     </div>
                     <div class="form-group">
                         <label for="month">Month</label>
-                        <input type="text" class="form-control" name="month" placeholder="Month" minlength="2" maxlength="2" required>
+                        <input type="text" class="form-control" name="month" value="{{monthData.month}}" minlength="2" maxlength="2" required>
                       </div>
-                    <!-- <select class="form-select" name="month">
+                    <!-- <select class="form-select" name="month" aria-label="Month">
                         <option selected>Choose Month:</option>
                         <option value="01">January</option>
                         <option value="02">February</option>
@@ -61,15 +61,15 @@
                       </select> -->
                     <div class="form-group">
                         <label for="gas">Natural Gas</label>
-                        <input type="text" class="form-control" name="gas" placeholder="00" maxlength="50" required>
+                        <input type="text" class="form-control" name="gas" value="{{monthData.gas}}" maxlength="50" required>
                       </div>
                       <div class="form-group">
                         <label for="electric">Electricity</label>
-                        <input type="text" class="form-control" name="electric" placeholder="00" maxlength="50" required>
+                        <input type="text" class="form-control" name="electric" value="{{monthData.electric}}" maxlength="50" required>
                       </div>
                       <div class="form-group">
                         <label for="milesDriven">Miles Driven</label>
-                        <input type="text" class="form-control" name="milesDriven" placeholder="00" maxlength="50" required>
+                        <input type="text" class="form-control" name="milesDriven" value="{{monthData.milesDriven}}" maxlength="50" required>
                       </div>
                     <div><input type="hidden" name="user_id" value="{{session.user_id}}"></div>
                     <div><button class="btn btn-primary">Create Month</button></div>
