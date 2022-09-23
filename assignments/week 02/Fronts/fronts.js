@@ -1,19 +1,34 @@
-Add Front
-
-class SLL {
-// constructor, other methods, removed for brevity
-    addFront(value) {
-        
+class SSLNode {
+    constructor(val) {
+        this.value = val;
+        this.next = null;
     }
 }
 
-SLL1 = new SLL()
-SLL1.addFront(18) => Node { data: 18, next: null }
-SLL1.addFront(5) => Node { data: 5, next: Node { data: 18, next: null } }
-SLL1.addFront(73) => Node { data: 73, next: Node { data: 5, next: Node { data: 18, next: null } } }
+// Add Front
+class SLL {
+    constructor() {
+        this.head = null;
+    }
+    addFront(value) {
+        var newnode = new SSLNode(value);
+        newnode.next = this.head;
+        this.head = newnode;
+    }
+}
 
+var SLL1 = new SLL()
+SLL1.addFront(18) 
+SLL1.addFront(5)
+SLL1.addFront(73)
 
-Remove Front
+console.log(SLL1)
+
+// => Node { data: 18, next: null }
+// => Node { data: 5, next: Node { data: 18, next: null } }
+// => Node { data: 73, next: Node { data: 5, next: Node { data: 18, next: null } } }
+
+// Remove Front
 
 class SLL {
     // constructor, other methods, removed for brevity
