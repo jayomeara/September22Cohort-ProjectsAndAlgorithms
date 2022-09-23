@@ -15,7 +15,17 @@ class SLL {
         newnode.next = this.head;
         this.head = newnode;
     }
-}
+    removeFront() {
+        if (this.head == null) {
+            return this.head;
+        }
+        var removeNode = this.head;
+        this.head = removeNode.next;
+        removeNode.next = null;
+        return this.head;
+    }
+ }
+
 
 var SLL1 = new SLL()
 SLL1.addFront(18) 
@@ -30,24 +40,10 @@ console.log(SLL1)
 
 // Remove Front
 
-class SLL {
-    // constructor, other methods, removed for brevity
-    removeFront() {
-    	
-    }
- }
-
- SLL1.removeFront() => Node { data: 5, next: Node { data: 18, next: null } }
- SLL1.removeFront() => Node { data: 18, next: null }
-
-Front
-class SLL {
-    // constructor, other methods, removed for brevity
-    front() {
-    	
-    }
- }
-
- SLL1.front() => 18
- SLL1.removeFront() => null
- SLL1.front() => null
+ SLL1.removeFront() 
+ console.log(SLL1)
+ SLL1.removeFront()
+ console.log(SLL1)
+ 
+//  => Node { data: 5, next: Node { data: 18, next: null } }
+//  => Node { data: 18, next: null }
